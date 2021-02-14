@@ -3,9 +3,16 @@ var generateBtn = document.querySelector("#generate");
 var letters = "abcdefghijklmnopqrztuvwxyz";
 
 function generatePassword() {
-  var randomValue = Math.floor(Math.random() * letters.length);
-  return letters[randomValue];
+  var result =""
+  var passwordLength = 16
+
+  for (i = 0; i < passwordLength; i++) {
+    var randomValue = Math.floor(Math.random() * letters.length);
+    result += letters[randomValue]
+  }
+  return result;
 }
+
 
 // Write password to the #password input
 function writePassword() {
