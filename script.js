@@ -1,5 +1,6 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
+var filters = ["upper", "lower", "number", "special"];
 
 function getRandomLowercaseLetter () {
   var letters = "abcdefghijklmnopqrztuvwxyz";
@@ -30,18 +31,18 @@ function generatePassword() {
   var passwordLength = 8
 
   for (i = 0; i < passwordLength; i++) {
-    var characterType = Math.floor(Math.random() * 4);
+    var characterType = filters[Math.floor(Math.random() * filters.length)];
     switch (characterType) {
-      case 0:
+      case "lower":
         result += getRandomLowercaseLetter();
         break;
-      case 1:
+      case "upper":
         result += getRandomUppercaseLetter();
         break;
-      case 2:
+      case "number":
         result += getRandomNumber();
         break;
-      case 3:
+      case "special":
         result += getRandomSpecialCharacter();
     }
   }
