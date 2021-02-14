@@ -24,6 +24,12 @@
             aria-label="Generated Password"
             name="password"
           ></textarea>
+          <label for="pass-length">Length of Password: </label>
+          <input type="number" id="pass-length" min="8" max="128" value=8>
+          <label for="check-upper"> Uppercase Letters?</label>
+          <input type="checkbox" id="check-upper" name="upper">
+          <label for="check-lower"> Lowercase Letters?</label>
+          <input type="checkbox" id="check-lower" name="lower">
         </div>
         <div class="card-footer">
           <button id="generate" class="btn">Generate Password</button>

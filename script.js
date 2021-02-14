@@ -1,6 +1,9 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-var filters = ["upper", "lower", "number", "special"];
+var passLengthField = document.querySelector("#pass-length");
+var uppercaseCheckbox = document.querySelector("#check-upper");
+var lowercaseCheckebox = document.querySelector("#check-lower");
+var filters = [];
 
 function getRandomLowercaseLetter () {
   var letters = "abcdefghijklmnopqrztuvwxyz";
@@ -28,7 +31,7 @@ function getRandomSpecialCharacter () {
 
 function generatePassword() {
   var result =""
-  var passwordLength = 8
+  var passwordLength = passLengthField.value
 
   for (i = 0; i < passwordLength; i++) {
     var characterType = filters[Math.floor(Math.random() * filters.length)];
@@ -60,5 +63,19 @@ function writePassword() {
 
 }
 
+function updateCheckboxFilter (props) {
+  if (props.target.checked) {
+    filters.push(props.target.name)
+  }
+  else {
+    var index = filters.indexOf(props.target.name);
+    if (index > -1) {
+      filters.splice(index, 1);
+    }
+  }
+}
+
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+uppercaseCheckbox.addEventListener("click", updateCheckboxFilter);
+lowercaseCheckebox.addEventListener("click", updateCheckboxFilter);
