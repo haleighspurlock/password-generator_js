@@ -4,9 +4,7 @@ var letters = "abcdefghijklmnopqrztuvwxyz";
 
 function generatePassword() {
   var randomValue = Math.floor(Math.random() * letters.length);
-  console.log("Generate Password")
-  console.log(letters[randomValue]);
-  return "random password"
+  return letters[randomValue];
 }
 
 // Write password to the #password input
