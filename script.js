@@ -1,14 +1,25 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-var letters = "abcdefghijklmnopqrztuvwxyz";
+
+function getRandomLowercaseLetter () {
+  var letters = "abcdefghijklmnopqrztuvwxyz";
+  var randomIndex = Math.floor(Math.random() * letters.length);
+  return letters[randomIndex]
+}
+
+function getRandomNumber () {
+  var numbers = "0123456789";
+  var randomIndex = Math.floor(Math.random() * numbers.length);
+  return numbers[randomIndex]
+}
 
 function generatePassword() {
   var result =""
-  var passwordLength = 16
+  var passwordLength = 8
 
   for (i = 0; i < passwordLength; i++) {
-    var randomValue = Math.floor(Math.random() * letters.length);
-    result += letters[randomValue]
+    // result += getRandomLowercaseLetter()
+    result += getRandomNumber()
   }
   return result;
 }
