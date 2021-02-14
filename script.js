@@ -3,28 +3,32 @@ var generateBtn = document.querySelector("#generate");
 var passLengthField = document.querySelector("#pass-length");
 var uppercaseCheckbox = document.querySelector("#check-upper");
 var lowercaseCheckebox = document.querySelector("#check-lower");
+var numberCheckbox = document.querySelector("#check-number");
+var specialCheckebox = document.querySelector("#check-special");
+
 var filters = [];
 
+const lowercaseCharacters = "abcdefghijklmnopqrztuvwxyz";
+const uppercaseCharacters = "ABCDEFGHIJKLMNOPQRZTUVWXYZ";
+const numberCharacters    = "0123456789";
+const specialCharacters   = "!@#$%^&*()";
+
 function getRandomLowercaseLetter () {
-  var letters = "abcdefghijklmnopqrztuvwxyz";
-  var randomIndex = Math.floor(Math.random() * letters.length);
-  return letters[randomIndex]
+  var randomIndex = Math.floor(Math.random() * lowercaseCharacters.length);
+  return lowercaseCharacters[randomIndex]
 }
 
 function getRandomUppercaseLetter () {
-  var letters = "ABCDEFGHIJKLMNOPQRZTUVWXYZ";
-  var randomIndex = Math.floor(Math.random() * letters.length);
-  return letters[randomIndex]
+  var randomIndex = Math.floor(Math.random() * uppercaseCharacters.length);
+  return uppercaseCharacters[randomIndex]
 }
 
 function getRandomNumber () {
-  var numbers = "0123456789";
-  var randomIndex = Math.floor(Math.random() * numbers.length);
-  return numbers[randomIndex]
+  var randomIndex = Math.floor(Math.random() * numberCharacters.length);
+  return numberCharacters[randomIndex]
 }
 
 function getRandomSpecialCharacter () {
-  var specialCharacters = "!@#$%^&*()";
   var randomIndex = Math.floor(Math.random() * specialCharacters.length);
   return specialCharacters[randomIndex]
 }
@@ -58,7 +62,6 @@ function writePassword() {
   console.log("Write Password");
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
   passwordText.value = password;
 
 }
@@ -79,3 +82,5 @@ function updateCheckboxFilter (props) {
 generateBtn.addEventListener("click", writePassword);
 uppercaseCheckbox.addEventListener("click", updateCheckboxFilter);
 lowercaseCheckebox.addEventListener("click", updateCheckboxFilter);
+numberCheckbox.addEventListener("click", updateCheckboxFilter);
+specialCheckebox.addEventListener("click", updateCheckboxFilter);
