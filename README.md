@@ -16,7 +16,7 @@ Working through this refactor is a perfect way to understand how to utilize func
 
 Deployed Website: 
 
-![Password-Generator](*****Include Screenshot here******)
+![Password-Generator](assets/pass-gen-ss.png)
 
 ## Requirements 
 ---
