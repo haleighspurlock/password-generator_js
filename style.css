@@ -72,6 +72,12 @@ header {
   clear: both;
 }
 
+#criteria {
+  display: none;
+  text-align: center;
+  font-size: 20px;
+}
+
 .btn {
   border: none;
   background-color: hsl(360, 91%, 36%);
@@ -116,6 +122,11 @@ button[disabled] {
   border-radius: 6px;
   resize: none;
   overflow: hidden;
+}
+
+label {
+  display: inline-block; 
+  text-align: justify;
 }
 
 @media (max-width: 690px) {

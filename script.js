@@ -1,18 +1,24 @@
-// Assignment Code
+// utilizing document.querySelector to utlize the first element w| these selectors
 var generateBtn = document.querySelector("#generate");
+var criteriaFilter = document.querySelector("#criteria");
 var passLengthField = document.querySelector("#pass-length");
 var uppercaseCheckbox = document.querySelector("#check-upper");
 var lowercaseCheckebox = document.querySelector("#check-lower");
 var numberCheckbox = document.querySelector("#check-number");
 var specialCheckebox = document.querySelector("#check-special");
 
+// empty array called filters that can be utilized for my character types 
 var filters = [];
 
+var isFiltersShowing = false;
+
+// using const vs var so they can be accessed globally but not reassigned
 const lowercaseCharacters = "abcdefghijklmnopqrztuvwxyz";
 const uppercaseCharacters = "ABCDEFGHIJKLMNOPQRZTUVWXYZ";
 const numberCharacters    = "0123456789";
 const specialCharacters   = "!@#$%^&*()";
 
+// functions to randomize the consts declared above
 function getRandomLowercaseLetter () {
   var randomIndex = Math.floor(Math.random() * lowercaseCharacters.length);
   return lowercaseCharacters[randomIndex]
@@ -33,6 +39,7 @@ function getRandomSpecialCharacter () {
   return specialCharacters[randomIndex]
 }
 
+// function using for loop to check the filters and produce password
 function generatePassword() {
   var result =""
   var passwordLength = passLengthField.value
@@ -58,14 +65,20 @@ function generatePassword() {
 
 
 // Write password to the #password input
-function writePassword() {
-  console.log("Write Password");
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-  passwordText.value = password;
-
+function generateButtonClicked() {
+  if (isFiltersShowing) {
+    console.log("Write Password");
+    var password = generatePassword();
+    var passwordText = document.querySelector("#password");
+    passwordText.value = password;
+  } else {
+    console.log("Show Filters")
+    criteriaFilter.style.display = "block"
+    isFiltersShowing = true
+  }
 }
 
+// updates checkboxes based on selection or not
 function updateCheckboxFilter (props) {
   if (props.target.checked) {
     filters.push(props.target.name)
@@ -78,8 +91,8 @@ function updateCheckboxFilter (props) {
   }
 }
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+// added eventListeners for all checkboxes so they update accordingly
+generateBtn.addEventListener("click", generateButtonClicked);
 uppercaseCheckbox.addEventListener("click", updateCheckboxFilter);
 lowercaseCheckebox.addEventListener("click", updateCheckboxFilter);
 numberCheckbox.addEventListener("click", updateCheckboxFilter);
