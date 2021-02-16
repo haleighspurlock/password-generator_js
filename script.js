@@ -41,9 +41,10 @@ function getRandomSpecialCharacter () {
 
 // function using for loop to check the filters and produce password
 function generatePassword() {
+
   var result =""
   var passwordLength = passLengthField.value
-
+  
   for (i = 0; i < passwordLength; i++) {
     var characterType = filters[Math.floor(Math.random() * filters.length)];
     switch (characterType) {
@@ -63,13 +64,35 @@ function generatePassword() {
   return result;
 }
 
+// Click button first time
+// Filter is showing
+//   Criteria is valid
+//     Print password
+//   Criteria is invalid
+//     Alert with critera needs
+// Filter is not showing
+//   Show filter
+
+function formFieldsAreValid () {
+  var passwordLength = passLengthField.value
+  var criteriaIsValid = passwordLength >= 8 && passwordLength <= 128 
+
+  return criteriaIsValid
+}
 // function allow generate button to show filters or produce password
 function generateButtonClicked() {
   if (isFiltersShowing) {
-    console.log("Write Password");
-    var password = generatePassword();
-    var passwordText = document.querySelector("#password");
-    passwordText.value = password;
+    var criteriaIsValid = formFieldsAreValid()
+
+    if (criteriaIsValid) {
+      console.log("Write Password");
+      var password = generatePassword();
+      var passwordText = document.querySelector("#password");
+      passwordText.value = password;
+    }
+    else {
+      alert("Not Valid! Please select character length between 8 and 128!")
+    }
   } else {
     console.log("Show Filters")
     criteriaFilter.style.display = "block"
