@@ -63,7 +63,6 @@ function generatePassword() {
   return result;
 }
 
-
 // function allow generate button to show filters or produce password
 function generateButtonClicked() {
   if (isFiltersShowing) {

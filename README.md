@@ -56,4 +56,5 @@ Email: haleighspurlock@gmail.com
 ## Credits
 ---
 Starter code provided by Trilogy Education Services
+
 Haleigh Spurlock 2021

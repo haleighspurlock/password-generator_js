@@ -11,7 +11,7 @@ body,
   margin: 0;
   padding: 0;
 }
-
+/* ----BODY---- */
 body {
   font-family: sans-serif;
   background-color: #f9fbfd;
@@ -54,6 +54,7 @@ header {
   min-height: 100px;
 }
 
+/* ----FOOTER---- */
 .card-footer {
   text-align: center;
 }
@@ -129,6 +130,7 @@ label {
   text-align: justify;
 }
 
+/* ----MEDIA QUERY---- */
 @media (max-width: 690px) {
   .btn {
     font-size: 1rem;
