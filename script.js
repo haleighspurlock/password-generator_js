@@ -64,7 +64,7 @@ function generatePassword() {
 }
 
 
-// Write password to the #password input
+// function allow generate button to show filters or produce password
 function generateButtonClicked() {
   if (isFiltersShowing) {
     console.log("Write Password");
