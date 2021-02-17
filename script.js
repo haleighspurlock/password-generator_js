@@ -3,9 +3,9 @@ var generateBtn = document.querySelector("#generate");
 var criteriaFilter = document.querySelector("#criteria");
 var passLengthField = document.querySelector("#pass-length");
 var uppercaseCheckbox = document.querySelector("#check-upper");
-var lowercaseCheckebox = document.querySelector("#check-lower");
+var lowercaseCheckbox = document.querySelector("#check-lower");
 var numberCheckbox = document.querySelector("#check-number");
-var specialCheckebox = document.querySelector("#check-special");
+var specialCheckbox = document.querySelector("#check-special");
 
 // empty array called filters that can be utilized for my character types 
 var filters = [];
@@ -18,81 +18,91 @@ const uppercaseCharacters = "ABCDEFGHIJKLMNOPQRZTUVWXYZ";
 const numberCharacters    = "0123456789";
 const specialCharacters   = "!@#$%^&*()";
 
-// functions to randomize the consts declared above
-function getRandomLowercaseLetter () {
-  var randomIndex = Math.floor(Math.random() * lowercaseCharacters.length);
-  return lowercaseCharacters[randomIndex]
+// made array to access all characters from listed arrays
+var allCharacterArrays = [
+  lowercaseCharacters, 
+  uppercaseCharacters, 
+  numberCharacters, 
+  specialCharacters
+]
+
+// function reads from a given array one random character
+function getRandomCharacterFromArray (array) {
+  var randomIndex = Math.floor(Math.random() * array.length);
+  return array[randomIndex]
 }
 
-function getRandomUppercaseLetter () {
-  var randomIndex = Math.floor(Math.random() * uppercaseCharacters.length);
-  return uppercaseCharacters[randomIndex]
-}
-
-function getRandomNumber () {
-  var randomIndex = Math.floor(Math.random() * numberCharacters.length);
-  return numberCharacters[randomIndex]
-}
-
-function getRandomSpecialCharacter () {
-  var randomIndex = Math.floor(Math.random() * specialCharacters.length);
-  return specialCharacters[randomIndex]
+// function takes joined character arrays and returns a random array
+function getRandomArray () {
+  var randomIndex = Math.floor(Math.random() * allCharacterArrays.length);
+  return allCharacterArrays[randomIndex]
 }
 
 // function using for loop to check the filters and produce password
 function generatePassword() {
-
-  var result =""
+  var finalPassword = ""
   var passwordLength = passLengthField.value
-  
-  for (i = 0; i < passwordLength; i++) {
+  // removes one of each character in filter type to ensure inclusion in final password
+  for (i = 0; i < passwordLength - filters.length; i++) {
     var characterType = filters[Math.floor(Math.random() * filters.length)];
     switch (characterType) {
       case "lower":
-        result += getRandomLowercaseLetter();
+        finalPassword += getRandomCharacterFromArray (lowercaseCharacters);
         break;
       case "upper":
-        result += getRandomUppercaseLetter();
+        finalPassword += getRandomCharacterFromArray (uppercaseCharacters);
         break;
       case "number":
-        result += getRandomNumber();
+        finalPassword += getRandomCharacterFromArray (numberCharacters);
         break;
       case "special":
-        result += getRandomSpecialCharacter();
+        finalPassword += getRandomCharacterFromArray (specialCharacters);
+        break;
     }
   }
-  return result;
+
+  // replaces character in each filter type if included 
+  if (filters.includes("lower")) {
+    finalPassword += getRandomCharacterFromArray (lowercaseCharacters);
+  }
+  if (filters.includes("upper")) {
+    finalPassword += getRandomCharacterFromArray (uppercaseCharacters);
+  }
+  if (filters.includes("number")) {
+    finalPassword += getRandomCharacterFromArray (numberCharacters);
+  }
+  if (filters.includes("special")) {
+    finalPassword += getRandomCharacterFromArray (specialCharacters);
+  }
+
+  return finalPassword;
 }
 
-// Click button first time
-// Filter is showing
-//   Criteria is valid
-//     Print password
-//   Criteria is invalid
-//     Alert with critera needs
-// Filter is not showing
-//   Show filter
-
+// checking to see if password criteria is met before producting password
 function formFieldsAreValid () {
   var passwordLength = passLengthField.value
-  var criteriaIsValid = passwordLength >= 8 && passwordLength <= 128 
-
-  return criteriaIsValid
+  var passwordLengthIsValid = passwordLength >= 8 && passwordLength <= 128
+  var filtersAreSelected = filters.length > 0
+  if (!passwordLengthIsValid) {
+    alert("Not Valid! Please select character length between 8 and 128!")
+  }
+  if (!filtersAreSelected) {
+    alert("Not Valid! Please select character type!")
+  }
+  return passwordLengthIsValid && filtersAreSelected
 }
+
 // function allow generate button to show filters or produce password
 function generateButtonClicked() {
   if (isFiltersShowing) {
     var criteriaIsValid = formFieldsAreValid()
 
     if (criteriaIsValid) {
-      console.log("Write Password");
       var password = generatePassword();
       var passwordText = document.querySelector("#password");
       passwordText.value = password;
     }
-    else {
-      alert("Not Valid! Please select character length between 8 and 128!")
-    }
+
   } else {
     console.log("Show Filters")
     criteriaFilter.style.display = "block"
@@ -116,6 +126,6 @@ function updateCheckboxFilter (props) {
 // added eventListeners for all checkboxes so they update accordingly
 generateBtn.addEventListener("click", generateButtonClicked);
 uppercaseCheckbox.addEventListener("click", updateCheckboxFilter);
-lowercaseCheckebox.addEventListener("click", updateCheckboxFilter);
+lowercaseCheckbox.addEventListener("click", updateCheckboxFilter);
 numberCheckbox.addEventListener("click", updateCheckboxFilter);
-specialCheckebox.addEventListener("click", updateCheckboxFilter);
+specialCheckbox.addEventListener("click", updateCheckboxFilter);
